@@ -1,5 +1,5 @@
 module.exports = function walk (obj) {
-    if (typeof obj === 'string') return camelCase(key); 
+    if (typeof obj === 'string') return camelCase(obj); 
     if (!obj || typeof obj !== 'object') return obj;
     if (Array.isArray(obj)) return obj.map(walk);
     return Object.keys(obj).reduce(function (acc, key) {
