@@ -1,5 +1,9 @@
-module.exports = function walk (obj) {
+module.exports = function(obj) {
     if (typeof obj === 'string') return camelCase(obj);
+    return walk(obj);
+};
+
+function walk (obj) {
     if (!obj || typeof obj !== 'object') return obj;
     if (Array.isArray(obj)) return obj.map(walk);
     return Object.keys(obj).reduce(function (acc, key) {
@@ -7,7 +11,7 @@ module.exports = function walk (obj) {
         acc[camel] = walk(obj[key]);
         return acc;
     }, {});
-};
+}
 
 function camelCase(str) {
     return str.replace(/[_.-](\w|$)/g, function (_,x) {
