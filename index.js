@@ -5,6 +5,7 @@ module.exports = function(obj) {
 
 function walk (obj) {
     if (!obj || typeof obj !== 'object') return obj;
+    if (isDate(obj) || isRegex(obj)) return obj;
     if (isArray(obj)) return map(obj, walk);
     return reduce(objectKeys(obj), function (acc, key) {
         var camel = camelCase(key);
@@ -15,12 +16,20 @@ function walk (obj) {
 
 function camelCase(str) {
     return str.replace(/[_.-](\w|$)/g, function (_,x) {
-        return x.toUpperCase()
+        return x.toUpperCase();
     });
 }
 
 var isArray = Array.isArray || function (obj) {
     return Object.prototype.toString.call(obj) === '[object Array]';
+};
+
+var isDate = function (obj) {
+    return Object.prototype.toString.call(obj) === '[object Date]';
+};
+
+var isRegex = function (obj) {
+    return Object.prototype.toString.call(obj) === '[object RegExp]';
 };
 
 var has = Object.prototype.hasOwnProperty;

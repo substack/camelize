@@ -26,6 +26,18 @@ test('string', function (t) {
     t.equal(camelize('one_two'), 'oneTwo');
 });
 
+test('date', function (t) {
+    t.plan(1);
+    var d = new Date();
+    t.equal(camelize(d), d);
+});
+
+test('regex', function (t) {
+    t.plan(1);
+    var r = /1234/;
+    t.equal(camelize(r), r);
+});
+
 test('only camelize strings that are the root value', function (t) {
     t.plan(2);
     t.equal(camelize('foo-bar'), 'fooBar');
