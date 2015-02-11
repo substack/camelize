@@ -44,7 +44,7 @@ or using the `tokens` option:
 var camelize = require('camelize');
 var obj = {
     fee_fie_foe: 'fum',
-    beep-boop: [
+    'beep-boop': [
         { 'abc.xyz': 'mno' },
         { 'foo-bar': 'baz' }
     ]
