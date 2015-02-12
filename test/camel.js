@@ -54,7 +54,7 @@ test('ignore keys if specified', function(t) {
             "_thing" : "some value"
         }
 
-    }, ['_test', '_thing']);
+    }, { ignore: ['_test', '_thing'] });
 
     t.deepEqual(res, { 
         'fooBar' : 'baz', 

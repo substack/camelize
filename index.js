@@ -1,21 +1,23 @@
-module.exports = function(obj, ignored) {
-    if (typeof obj === 'string') return camelCase(obj, ignored);
-    return walk(obj, ignored);
+module.exports = function(obj, options) {
+    options = options || {};
+    if (typeof obj === 'string') return camelCase(obj, options);
+    return walk(obj, options);
 };
 
-function walk (obj, ignored) {
+function walk (obj, options) {
     if (!obj || typeof obj !== 'object') return obj;
     if (isDate(obj) || isRegex(obj)) return obj;
-    if (isArray(obj)) return map(obj, function(obj) {  return walk(obj, ignored) });
+    if (isArray(obj)) return map(obj, function(obj) {  return walk(obj, options) });
     return reduce(objectKeys(obj), function (acc, key) {
-        var camel = camelCase(key, ignored);
-        acc[camel] = walk(obj[key], ignored);
+        var camel = camelCase(key, options);
+        acc[camel] = walk(obj[key], options);
         return acc;
     }, {});
 }
 
-function camelCase(str, ignored) {
-    if (ignored && ignored.indexOf(str) !== -1) {
+function camelCase(str, options) {
+    
+    if (options.ignore && options.ignore.indexOf(str) !== -1) {
         return str;
     }
     return str.replace(/[_.-](\w|$)/g, function (_,x) {
