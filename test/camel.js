@@ -44,3 +44,24 @@ test('only camelize strings that are the root value', function (t) {
     var res = camelize({ 'foo-bar': 'baz-foo' });
     t.deepEqual(res, { fooBar: 'baz-foo' });
 });
+
+test('ignore keys if specified', function(t) {
+    t.plan(1);
+    var res = camelize({ 
+        'foo-bar' : 'baz', 
+        '_test' : 'stuff',
+        'baz-qux': {
+            "_thing" : "some value"
+        }
+
+    }, { ignore: ['_test', '_thing'] });
+
+    t.deepEqual(res, { 
+        'fooBar' : 'baz', 
+        '_test' : 'stuff',
+        'bazQux': {
+            "_thing" : "some value"
+        }
+    })
+
+})
