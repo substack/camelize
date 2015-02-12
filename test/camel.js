@@ -9,6 +9,12 @@ var obj = {
     ]
 };
 
+var mixed = {
+    'http://example.org/an-id-i-dont-want-camelcased': 'yeay'
+    , 'but_i_do_want_this': 'to camelcase'
+    , 'mixed-might_be.surprising': 'though'
+}
+
 test('camelize a nested object', function (t) {
     t.plan(1);
     var res = camelize(obj);
@@ -44,3 +50,15 @@ test('only camelize strings that are the root value', function (t) {
     var res = camelize({ 'foo-bar': 'baz-foo' });
     t.deepEqual(res, { fooBar: 'baz-foo' });
 });
+
+test('only camelize configured tokens',function(t){
+    t.plan(1);
+    var res = camelize(mixed, '_');
+    t.deepEqual(res, {
+        "http://example.org/an-id-i-dont-want-camelcased": "yeay"
+        , "butIDoWantThis": "to camelcase"
+        , "mixed-mightBe.surprising":"though"
+    });
+
+})
+

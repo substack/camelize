@@ -37,15 +37,49 @@ output:
 }
 ```
 
+or using the `tokens` option:
+
+``` js
+
+var camelize = require('camelize');
+var obj = {
+    fee_fie_foe: 'fum',
+    'beep-boop': [
+        { 'abc.xyz': 'mno' },
+        { 'foo-bar': 'baz' }
+    ]
+};
+//only camelize the '_' tokens in keys
+var res = camelize(obj, '_');
+console.log(JSON.stringify(res, null, 2));
+```
+
+output:
+
+```
+{
+  "feeFieFoe": "fum",
+  "beep-boop": [
+    {
+      "abc.xyz": "mno"
+    },
+    {
+      "foo-bar": "baz"
+    }
+  ]
+}
+```
+
 # methods
 
 ``` js
 var camelize = require('camelize')
 ```
 
-## camelize(obj)
+## camelize(obj, tokens)
 
-Convert the key strings in `obj` to camel-case recursively.
+Convert the key strings in `obj` to camel-case recursively, replacing the `tokens`
+accordingly. By default, `tokens` are greedily replaced using `_.-`.
 
 # install
 
