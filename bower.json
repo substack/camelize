@@ -1,0 +1,23 @@
+{
+  "name": "camelize",
+  "description": "recursively transform key strings to camel-case",
+  "main": "index.js",
+  "authors": [
+    "substack"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "camel-case",
+    "json",
+    "transform"
+  ],
+  "homepage": "https://github.com/substack/camelize",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
