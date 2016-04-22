@@ -21,6 +21,18 @@ test('camelize a nested object', function (t) {
     });
 });
 
+test('camelize with given regex', function(t) {
+    t.plan(1);
+    var res = camelize(obj, /[_](\w|$)/g);
+    t.deepEqual(res, {
+        "feeFieFoe": "fum",
+        "beepBoop": [
+            { "abc.xyz": "mno" },
+            { "foo-bar": "baz" }
+        ]
+    });
+});
+
 test('string', function (t) {
     t.plan(1);
     t.equal(camelize('one_two'), 'oneTwo');
