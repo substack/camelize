@@ -43,9 +43,9 @@ output:
 var camelize = require('camelize')
 ```
 
-## camelize(obj)
+## camelize(obj, regex)
 
-Convert the key strings in `obj` to camel-case recursively.
+Convert the key strings in `obj` to camel-case recursively. `regex` defaults to `/[_.-](\w|$)/g`.
 
 # install
 

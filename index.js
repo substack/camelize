@@ -1,21 +1,24 @@
-module.exports = function(obj) {
-    if (typeof obj === 'string') return camelCase(obj);
-    return walk(obj);
+module.exports = function(obj, regex) {
+    if (typeof obj === 'string') return camelCase(obj, regex);
+    return walk(obj, regex);
 };
 
-function walk (obj) {
+function walk (obj, regex) {
     if (!obj || typeof obj !== 'object') return obj;
     if (isDate(obj) || isRegex(obj)) return obj;
-    if (isArray(obj)) return map(obj, walk);
+    if (isArray(obj)) return map(obj, function (item) {
+        return walk(item, regex);
+    });
     return reduce(objectKeys(obj), function (acc, key) {
-        var camel = camelCase(key);
-        acc[camel] = walk(obj[key]);
+        var camel = camelCase(key, regex);
+        acc[camel] = walk(obj[key], regex);
         return acc;
     }, {});
 }
 
-function camelCase(str) {
-    return str.replace(/[_.-](\w|$)/g, function (_,x) {
+function camelCase (str, regex) {
+    regex = regex || /[_.-](\w|$)/g;
+    return str.replace(regex, function (_,x) {
         return x.toUpperCase();
     });
 }
