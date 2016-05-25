@@ -1,3 +1,5 @@
+var camelCase = require('camelcase');
+
 module.exports = function(obj) {
     if (typeof obj === 'string') return camelCase(obj);
     return walk(obj);
@@ -12,12 +14,6 @@ function walk (obj) {
         acc[camel] = walk(obj[key]);
         return acc;
     }, {});
-}
-
-function camelCase(str) {
-    return str.replace(/[_.-](\w|$)/g, function (_,x) {
-        return x.toUpperCase();
-    });
 }
 
 var isArray = Array.isArray || function (obj) {

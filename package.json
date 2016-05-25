@@ -6,6 +6,9 @@
     "devDependencies": {
         "tape": "~2.3.2"
     },
+    "dependencies": {
+        "camelcase": "^3.0.0"
+    },
     "scripts": {
         "test": "tape test/*.js"
     },
