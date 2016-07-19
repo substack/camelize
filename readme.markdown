@@ -47,6 +47,12 @@ var camelize = require('camelize')
 
 Convert the key strings in `obj` to camel-case recursively.
 
+## camelize.circular(obj)
+
+Works just like `camelize`, but works with and preserves circular references.
+If `camelize(obj)` throws a "Maximum call stack size exceeded" error, try this.
+Somewhat slower than `camelize()`, so only use it if it's necessary.
+
 # install
 
 With [npm](https://npmjs.org) do:
