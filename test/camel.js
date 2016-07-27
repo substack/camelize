@@ -26,6 +26,11 @@ test('string', function (t) {
     t.equal(camelize('one_two'), 'oneTwo');
 });
 
+test('capitalized string', function (t) {
+    t.plan(1);
+    t.equal(camelize('ONE_TWO'), 'oneTwo');
+});
+
 test('date', function (t) {
     t.plan(1);
     var d = new Date();
