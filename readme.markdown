@@ -43,9 +43,34 @@ output:
 var camelize = require('camelize')
 ```
 
-## camelize(obj)
+## camelize(obj, opts = {})
 
 Convert the key strings in `obj` to camel-case recursively.
+
+### options
+
+You can pass an object of options. Available options:
+
+- `acronyms`
+
+Replaces found coincidences with their corresponding value:
+
+```js
+var camelize = require('camelize');
+var acronyms = { id: 'ID', url: 'URL' };
+var obj = { id: 1, image_url 'example.com', category_id: 2 };
+var res = camelize(obj, { acronyms: acronyms });
+```
+
+output:
+
+```json
+{
+  "id": 1,
+  "imageURL": "example.com",
+  "categoryID": 2
+}
+```
 
 # install
 

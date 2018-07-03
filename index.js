@@ -1,22 +1,25 @@
-module.exports = function(obj) {
-    if (typeof obj === 'string') return camelCase(obj);
-    return walk(obj);
+module.exports = function(obj, opts) {
+    if (typeof obj === 'string') return camelCase(obj, opts);
+    return walk(obj, opts);
 };
 
-function walk (obj) {
+function walk (obj, opts) {
     if (!obj || typeof obj !== 'object') return obj;
     if (isDate(obj) || isRegex(obj)) return obj;
-    if (isArray(obj)) return map(obj, walk);
+    if (isArray(obj)) return map(obj, walk, opts);
     return reduce(objectKeys(obj), function (acc, key) {
-        var camel = camelCase(key);
-        acc[camel] = walk(obj[key]);
+        var camel = camelCase(key, opts);
+        acc[camel] = walk(obj[key], opts);
         return acc;
     }, {});
 }
 
-function camelCase(str) {
-    return str.replace(/[_.-](\w|$)/g, function (_,x) {
-        return x.toUpperCase();
+function camelCase(str, opts) {
+    var acronyms = (opts || {}).acronyms || {};
+    var acronymsKeys = Object.keys(acronyms);
+    return str.replace(/[_.-]([^_.-]+|$)/g, function (_,x) {
+        if (acronymsKeys.indexOf(x) > -1) return acronyms[x];
+        return x.substr(0, 1).toUpperCase() + x.substr(1);
     });
 }
 
@@ -41,11 +44,11 @@ var objectKeys = Object.keys || function (obj) {
     return keys;
 };
 
-function map (xs, f) {
-    if (xs.map) return xs.map(f);
+function map (xs, f, o) {
+    if (xs.map) return xs.map(function (obj) { return f(obj, o); });
     var res = [];
     for (var i = 0; i < xs.length; i++) {
-        res.push(f(xs[i], i));
+        res.push(f(xs[i], o));
     }
     return res;
 }
