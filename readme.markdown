@@ -92,6 +92,26 @@ output:
 }
 ```
 
+- `skip`
+
+Skips transformation if key matches passed regex.
+
+```js
+var camelize = require('camelize'):
+var skip = /\d{4}-\d{1,2}-\d{1,2}/;
+var obj = { id: 1, '1970-01-01': 'bar' };
+var res = camelize(obj, { skip: skip });
+```
+
+output:
+
+```json
+{
+  "id": 1,
+  "1970-01-01": "bar"
+}
+```
+
 # install
 
 With [npm](https://npmjs.org) do:

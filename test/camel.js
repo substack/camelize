@@ -67,3 +67,12 @@ test('uses transform function passed', function(t) {
     t.equal(camelize('bar', opts), 'foo');
 });
 
+test('skips matching keys', function(t) {
+    var opts = {
+      skip: /\d{4}-\d{1,2}-\d{1,2}/,
+    };
+
+    t.plan(1);
+    t.equal(camelize('1970-01-01', opts), '1970-01-01');
+});
+

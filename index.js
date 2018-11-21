@@ -18,8 +18,10 @@ function camelCase(str, opts) {
     opts = opts || {};
     var acronyms = opts.acronyms || {};
     var transform = opts.transform;
+    var skip = opts.skip;
     var acronymsKeys = Object.keys(acronyms);
 
+    if (skip && skip.test(str)) return str;
     if (transform) return transform(str);
 
     return str.replace(/[_.-]([^_.-]+|$)/g, function (_,x) {
