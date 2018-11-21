@@ -15,10 +15,16 @@ function walk (obj, opts) {
 }
 
 function camelCase(str, opts) {
-    var acronyms = (opts || {}).acronyms || {};
+    opts = opts || {};
+    var acronyms = opts.acronyms || {};
+    var transform = opts.transform;
     var acronymsKeys = Object.keys(acronyms);
+
+    if (transform) return transform(str);
+
     return str.replace(/[_.-]([^_.-]+|$)/g, function (_,x) {
         if (acronymsKeys.indexOf(x) > -1) return acronyms[x];
+
         return x.substr(0, 1).toUpperCase() + x.substr(1);
     });
 }

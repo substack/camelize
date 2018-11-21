@@ -72,6 +72,26 @@ output:
 }
 ```
 
+- `transform`
+
+Uses passed function to transform key:
+
+```js
+var camelize = require('camelize'):
+var transform = function(x) { return x.replace(/\d/g, 'x'); }
+var obj = { id: 1, foo1: 'bar' };
+var res = camelize(obj, { transform: transform });
+```
+
+output:
+
+```json
+{
+  "id": 1,
+  "foox": "bar"
+}
+```
+
 # install
 
 With [npm](https://npmjs.org) do:

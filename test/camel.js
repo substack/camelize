@@ -57,3 +57,13 @@ test('uses passed acronyms', function(t) {
     var arr = camelize(['my_id'], opts);
     t.deepEqual(arr, ['my_id']);
 });
+
+test('uses transform function passed', function(t) {
+    var opts = {
+      transform: function (x) { return 'foo'; },
+    };
+
+    t.plan(1);
+    t.equal(camelize('bar', opts), 'foo');
+});
+
