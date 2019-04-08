@@ -1,4 +1,4 @@
-var test = require('tape');
+var assert = require('assert');
 var camelize = require('../');
 
 var obj = {
@@ -9,38 +9,35 @@ var obj = {
     ]
 };
 
-test('camelize a nested object', function (t) {
-    t.plan(1);
-    var res = camelize(obj);
-    t.deepEqual(res, {
-        "feeFieFoe": "fum",
-        "beepBoop": [
-            { "abcXyz": "mno" },
-            { "fooBar": "baz" }
-        ]
+describe('camelize2', function () {
+    it('nested object', function () {
+        var res = camelize(obj);
+        assert.deepEqual(res, {
+            'feeFieFoe': 'fum',
+            'beepBoop': [
+                { 'abcXyz': 'mno' },
+                { 'fooBar': 'baz' }
+            ]
+        });
     });
-});
 
-test('string', function (t) {
-    t.plan(1);
-    t.equal(camelize('one_two'), 'oneTwo');
-});
+    it('string', function () {
+        assert.equal(camelize('one_two'), 'oneTwo');
+    });
 
-test('date', function (t) {
-    t.plan(1);
-    var d = new Date();
-    t.equal(camelize(d), d);
-});
+    it('date', function () {
+        var d = new Date();
+        assert.equal(camelize(d), d);
+    });
 
-test('regex', function (t) {
-    t.plan(1);
-    var r = /1234/;
-    t.equal(camelize(r), r);
-});
+    it('regex', function () {
+        var r = /1234/;
+        assert.equal(camelize(r), r);
+    });
 
-test('only camelize strings that are the root value', function (t) {
-    t.plan(2);
-    t.equal(camelize('foo-bar'), 'fooBar');
-    var res = camelize({ 'foo-bar': 'baz-foo' });
-    t.deepEqual(res, { fooBar: 'baz-foo' });
+    it('only camelize strings that are the root value', function () {
+        assert.equal(camelize('foo-bar'), 'fooBar');
+        var res = camelize({'foo-bar': 'baz-foo'});
+        assert.deepEqual(res, {fooBar: 'baz-foo'});
+    });
 });

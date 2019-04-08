@@ -4,10 +4,10 @@
     "description": "recursively transform key strings to camel-case",
     "main": "index.js",
     "devDependencies": {
-        "tape": "4.10.1"
+        "mocha": "6.1.2"
     },
     "scripts": {
-        "test": "tape test/*.js"
+        "test": "mocha test/*.js"
     },
     "repository": {
         "type": "git",
