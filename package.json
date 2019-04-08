@@ -25,5 +25,8 @@
         "name": "Denys Ivko",
         "email": "ivkodenis92@gmail.com"
     },
-    "license": "MIT"
+    "license": "MIT",
+    "dependencies": {
+        "camelcase": "5.3.1"
+    }
 }
