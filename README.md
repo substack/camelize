@@ -9,13 +9,17 @@ Recursively transform key strings to camel-case
 [camelize](https://github.com/substack/camelize) is a great and simple library.
 But unfortunately repository seems to be dead and has not been updated for a long time.
 
-Camelize2 for the resque!
+**Camelize2 for the resque!**
 
-This library provides new features according to developer needs.
-This library fixes issues of [camelize](https://github.com/substack/camelize).
-This library is opened for [contributing](#contributing).
+:white_check_mark: This library provides new features according to developer needs.
 
-was initially forked from [camelize](https://github.com/substack/camelize).
+:white_check_mark: This library fixes issues of [camelize](https://github.com/substack/camelize).
+
+:white_check_mark: This library uses Mocha for testing
+
+:white_check_mark: This library is opened for [contributing](#contributing).
+
+Initially was forked from [camelize](https://github.com/substack/camelize).
 
 
 ## Example
@@ -63,7 +67,7 @@ npm install camelize2
 
 ## Running the tests
 
-You can run tests with the following command:
+You can run Mocha tests with the following command:
 
 ```
 npm run test
