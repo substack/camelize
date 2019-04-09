@@ -1,6 +1,6 @@
 # camelize2
 
-Recursively transform key strings to camel-case
+Super handy and flexible library for transforming any-shape key strings to camel-case
 
 [![build status](https://secure.travis-ci.org/DenysIvko/camelize2.png)](http://travis-ci.org/DenysIvko/camelize2)
 
@@ -22,37 +22,103 @@ But unfortunately repository seems to be dead and has not been updated for a lon
 Initially was forked from [camelize](https://github.com/substack/camelize).
 
 
-## Example
+## Examples
 
 ``` js
-const camelize = require('camelize');
+const camelize = require('camelize2')
 
-const obj = {
+// You can pass strings
+camelize('Foo-Bar')
+//=> 'fooBar'
+
+
+// You can pass objects
+camelize({
+    'abc.xyz': 'mno'
+})
+//=> {'abcXyz': 'mno'}
+
+
+// You can pass arrays 
+camelize([
+     { 'abc.xyz': 'mno' },
+     { 'foo-bar': 'baz' }
+ ])
+//=> [{'abcXyz': 'mno'}, {'fooBar': 'baz'}]
+
+
+// Also you can pass more complex structures
+camelize({
     fee_fie_foe: 'fum',
     beep_boop: [
         { 'abc.xyz': 'mno' },
         { 'foo-bar': 'baz' }
     ]
-};
+});
+//=>    {
+//=>        "feeFieFoe": "fum",
+//=>        "beepBoop": [
+//=>            {
+//=>                "abcXyz": "mno"
+//=>            },
+//=>            {
+//=>                "fooBar": "baz"
+//=>            }
+//=>        ]
+//=>    }
 
-const res = camelize(obj);
 
-console.log(JSON.stringify(res, null, 2));
+// In case you passed other types, you get them back
+camelize(true)
+//=> true
 ```
 
-Output:
+## When to use camelize2?
 
-```
+Let's say you've got following response from backend:
+```json
 {
-  "feeFieFoe": "fum",
-  "beepBoop": [
+  "items": [
     {
-      "abcXyz": "mno"
+      "product_name": "Table",
+      "product_category_tags": [
+        "chip",
+        "handy"
+      ],
+      "short_url": "http://as.is/941"
     },
     {
-      "fooBar": "baz"
+      "product_name": "Chair",
+      "product_category_tags": [
+      ],
+      "short_url": "http://as.is/943"
     }
-  ]
+  ],
+  "count": 2
+}
+```
+
+With camelcase2 you can easily convert to camel case: 
+
+```json
+{
+  "items": [
+    {
+      "productName": "Table",
+      "productCategoryTags": [
+        "chip",
+        "handy"
+      ],
+      "shortUrl": "http://as.is/941"
+    },
+    {
+      "productName": "Chair",
+      "productCategoryTags": [
+      ],
+      "shortUrl": "http://as.is/943"
+    }
+  ],
+  "count": 2
 }
 ```
 
